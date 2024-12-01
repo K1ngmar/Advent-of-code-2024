@@ -10,8 +10,7 @@ int main(void)
 {
     std::ifstream inputFile("input.txt");
 
-
-    std::multiset<int32_t> leftHistoriansLocationIdList;
+    std::set<int32_t> leftHistoriansLocationIdList;
     std::multiset<int32_t> rightHistoriansLocationIdList;
     while (inputFile.good())
     {
@@ -30,6 +29,13 @@ int main(void)
         difference += std::abs(leftLocationId - rightLocationId);
     }
 
+    int32_t similarityScore = 0;
+    for (const auto& id : leftHistoriansLocationIdList)
+    {
+        similarityScore += id * rightHistoriansLocationIdList.count(id);
+    }
+
     std::cout << "ex00: " << difference << std::endl;
+    std::cout << "ex01: " << similarityScore << std::endl;
     return 0;
 }
